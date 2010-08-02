@@ -44,20 +44,17 @@ by doing the following,::
 Examples
 ========
 
-Apply function after ``n`` msecs
---------------------------------
-::
+Apply function after ``n`` msecs::
+
     >>> import timer
     >>> timer.apply_after(msecs, fun, args, kwargs, priority=0)
 
-Apply function every ``n`` msecs
---------------------------------
-::
+Apply function every ``n`` msecs::
+
     >>> timer.apply_interval(msecs, fun, args, kwargs, priority=0)
 
-Apply function at a specific date (a ``datetime`` object)
----------------------------------------------------------
-::
+Apply function at a specific date (a ``datetime`` object)::
+
     >>> timer.apply_at(datetime, fun, args, kwargs, priority=0)
 
 Cancelling timers
