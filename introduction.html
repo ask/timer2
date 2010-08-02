@@ -66,6 +66,14 @@
 or at an interval. It can be used as a replacement to <tt class="docutils literal"><span class="pre">threading.Timer</span></tt>,
 the difference is that <tt class="docutils literal"><span class="pre">timer</span></tt> is always only using a single thread (unless
 you manually start more of them)</p>
+<p>You should never use this to apply expensive operations, as this would not
+be effective when running in a single thread, rather you should make the
+timer move the operations to a execution pool (like a thread/multiprocessing
+pool, or maybe sending a message):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">pool</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pool</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timer</span><span class="o">.</span><span class="n">apply_after</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">pool</span><span class="o">.</span><span class="n">apply_async</span><span class="p">,</span> <span class="n">expensive_fun</span><span class="p">)</span>
+</pre></div>
+</div>
 </div>
 <div class="section" id="documentation">
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
