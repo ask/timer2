@@ -4,6 +4,7 @@ from __future__ import generators
 
 import atexit
 import heapq
+import sys
 import warnings
 
 from threading import Thread, Event
@@ -34,10 +35,7 @@ class Entry(object):
         self.tref = self
 
     def __call__(self):
-        try:
-            return self.fun(*self.args, **self.kwargs)
-        except Exception, exc:
-            warnings.warn(repr(exc), TimedFunctionFailed)
+        return self.fun(*self.args, **self.kwargs)
 
     def cancel(self):
         self.tref.cancelled = True
@@ -45,29 +43,34 @@ class Entry(object):
 
 class Schedule(object):
     """ETA scheduler."""
+    on_error = None
 
-    def __init__(self, max_interval=DEFAULT_MAX_INTERVAL):
+    def __init__(self, max_interval=DEFAULT_MAX_INTERVAL, on_error=None):
         self.max_interval = float(max_interval)
+        self.on_error = on_error or self.on_error
         self._queue = []
 
-    def enter(self, item, eta=None, priority=0):
-        """Enter item into the scheduler.
+    def handle_error(self, exc_info):
+        if self.on_error:
+            self.on_error(exc_info)
+            return True
 
-        :param item: Item to enter.
-        :param eta: Scheduled time as a :class:`datetime.datetime` object.
-        :param priority: Unused.
-        :param callback: Callback to call when the item is scheduled.
-            This callback takes no arguments.
+    def enter(self, entry, eta=None, priority=0):
+        """Enter function into the scheduler.
+
+        :param entry: Item to enter.
+        :keyword eta: Scheduled time as a :class:`datetime.datetime` object.
+        :keyword priority: Unused.
 
         """
         if isinstance(eta, datetime):
             try:
                 eta = mktime(eta.timetuple())
             except OverflowError:
-                pass
+                self.handle_error(sys.exc_info())
         eta = eta or time()
-        heapq.heappush(self._queue, (eta, priority, item))
-        return item
+        heapq.heappush(self._queue, (eta, priority, entry))
+        return entry
 
     def __iter__(self):
         """The iterator yields the time to sleep for between runs."""
@@ -78,7 +81,7 @@ class Schedule(object):
 
         while 1:
             if self._queue:
-                eta, priority, item = verify = self._queue[0]
+                eta, priority, entry = verify = self._queue[0]
                 now = nowfun()
 
                 if now < eta:
@@ -87,8 +90,13 @@ class Schedule(object):
                     event = pop(self._queue)
 
                     if event is verify:
-                        if not item.cancelled:
-                            item()
+                        if not entry.cancelled:
+                            try:
+                                entry()
+                            except Exception:
+                                if not self.handle_error(sys.exc_info()):
+                                    warnings.warn(repr(exc),
+                                                  TimedFunctionFailed)
                         continue
                     else:
                         heapq.heappush(self._queue, event)
@@ -107,7 +115,8 @@ class Schedule(object):
 
     @property
     def queue(self):
-        return map(heapq.heappop, [list(self._queue)]*len(events))
+        events = list(self._queue)
+        return map(heapq.heappop, [events]*len(events))
 
 
 class Timer(Thread):
@@ -115,25 +124,29 @@ class Timer(Thread):
 
     precision = 0.3
     running = False
+    on_tick = None
 
-    def __init__(self, schedule=None):
-        self.schedule = schedule or Schedule()
+    def __init__(self, schedule=None, precision=None, on_error=None,
+            on_tick=None):
+        if precision is not None:
+            self.precision = precision
+        self.schedule = schedule or Schedule(on_error=on_error)
+        self.on_tick = on_tick or self.on_tick
 
         Thread.__init__(self)
-        self._scheduler = iter(self.schedule)
         self._shutdown = Event()
         self._stopped = Event()
         self.setDaemon(True)
 
     def run(self):
         self.running = True
+        scheduler = iter(self.schedule)
         while not self._shutdown.isSet():
-            self.tick()
+            delay = scheduler.next() or self.precision
+            if self.on_tick:
+                self.on_tick(delay)
+            sleep(delay)
         self._stopped.set()
-
-    def tick(self):
-        delay = self._scheduler.next()
-        sleep(delay or self.precision)
 
     def stop(self):
         if self.running:
