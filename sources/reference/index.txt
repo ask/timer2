@@ -8,4 +8,4 @@
 .. toctree::
     :maxdepth: 2
 
-    timer
+    timer2
