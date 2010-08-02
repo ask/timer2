@@ -174,6 +174,9 @@ class Timer(Thread):
     def cancel(self, tref):
         tref.cancel()
 
+    def clear(self):
+        self.schedule.clear()
+
 _default_timer = Timer()
 apply_after = _default_timer.apply_after
 apply_at = _default_timer.apply_at
@@ -182,5 +185,6 @@ enter_after = _default_timer.enter_after
 enter = _default_timer.enter
 exit_after = _default_timer.exit_after
 cancel = _default_timer.cancel
+clear = _default_timer.clear
 
 atexit.register(_default_timer.stop)
