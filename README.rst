@@ -18,7 +18,7 @@ timer move the operations to a execution pool (like a thread/multiprocessing
 pool, or maybe sending a message)::
 
     >>> pool = multiprocessing.Pool()
-    >>> timer.apply_after(10000, pool.apply_async, expensive_fun)
+    >>> timer.apply_after(10000, pool.apply_async, (expensive_fun, ))
 
 Documentation
 -------------
