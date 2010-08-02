@@ -1,4 +1,4 @@
-Timer Documentation
+timer2 Documentation
 ===================
 
 Contents:

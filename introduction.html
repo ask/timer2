@@ -6,9 +6,9 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>timer - Schedule Python functions. &mdash; Timer v0.1.0 documentation</title>
-    <link rel="stylesheet" href="static/celery.css" type="text/css" />
-    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <title>timer2 - Schedule Python functions. &mdash; Timer2 v0.1.0 documentation</title>
+    <link rel="stylesheet" href="_static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
@@ -18,12 +18,12 @@
         HAS_SOURCE:  true
       };
     </script>
-    <script type="text/javascript" src="static/jquery.js"></script>
-    <script type="text/javascript" src="static/underscore.js"></script>
-    <script type="text/javascript" src="static/doctools.js"></script>
-    <link rel="top" title="Timer v0.1.0 documentation" href="index.html" />
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Timer2 v0.1.0 documentation" href="index.html" />
     <link rel="next" title="API Reference" href="reference/index.html" />
-    <link rel="prev" title="Timer Documentation" href="index.html" /> 
+    <link rel="prev" title="timer2 Documentation" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -39,9 +39,9 @@
           <a href="reference/index.html" title="API Reference"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Timer Documentation"
+          <a href="index.html" title="timer2 Documentation"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">Timer v0.1.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Timer2 v0.1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -50,8 +50,8 @@
         <div class="bodywrapper">
           <div class="body">
             
-  <div class="section" id="timer-schedule-python-functions">
-<h1>timer - Schedule Python functions.<a class="headerlink" href="#timer-schedule-python-functions" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="timer2-schedule-python-functions">
+<h1>timer2 - Schedule Python functions.<a class="headerlink" href="#timer2-schedule-python-functions" title="Permalink to this headline">¶</a></h1>
 <table class="docutils field-list" frame="void" rules="none">
 <col class="field-name" />
 <col class="field-body" />
@@ -62,16 +62,16 @@
 </table>
 <div class="section" id="introduction">
 <h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
-<p>The timer module lets you schedule Python functions at specific times,
+<p>The <tt class="docutils literal"><span class="pre">timer2</span></tt> module lets you schedule Python functions at specific times,
 or at an interval. It can be used as a replacement to <tt class="docutils literal"><span class="pre">threading.Timer</span></tt>,
-the difference is that <tt class="docutils literal"><span class="pre">timer</span></tt> is always only using a single thread (unless
+the difference is that <tt class="docutils literal"><span class="pre">timer2</span></tt> is always only using a single thread (unless
 you manually start more of them)</p>
 <p>You should never use this to apply expensive operations, as this would not
 be effective when running in a single thread, rather you should make the
 timer move the operations to a execution pool (like a thread/multiprocessing
 pool, or maybe sending a message):</p>
 <div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">pool</span> <span class="o">=</span> <span class="n">multiprocessing</span><span class="o">.</span><span class="n">Pool</span><span class="p">()</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">timer</span><span class="o">.</span><span class="n">apply_after</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">pool</span><span class="o">.</span><span class="n">apply_async</span><span class="p">,</span> <span class="n">expensive_fun</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timer2</span><span class="o">.</span><span class="n">apply_after</span><span class="p">(</span><span class="mi">10000</span><span class="p">,</span> <span class="n">pool</span><span class="o">.</span><span class="n">apply_async</span><span class="p">,</span> <span class="p">(</span><span class="n">expensive_fun</span><span class="p">,</span> <span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -79,16 +79,16 @@ pool, or maybe sending a message):</p>
 <h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
 <p>Timer is using Sphinx, and the latest documentation is available at GitHub:</p>
 <blockquote>
-<a class="reference external" href="http://ask.github.com/timer">http://ask.github.com/timer</a></blockquote>
+<a class="reference external" href="http://ask.github.com/timer2">http://ask.github.com/timer2</a></blockquote>
 <div class="section" id="installation">
 <h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
-<p>You can install <tt class="docutils literal"><span class="pre">timer</span></tt> either via the Python Package Index (PyPI)
+<p>You can install <tt class="docutils literal"><span class="pre">timer2</span></tt> either via the Python Package Index (PyPI)
 or from source.</p>
 <p>To install using <tt class="docutils literal"><span class="pre">pip</span></tt>,:</p>
-<div class="highlight-python"><pre>$ pip install timer</pre>
+<div class="highlight-python"><pre>$ pip install timer2</pre>
 </div>
 <p>To install using <tt class="docutils literal"><span class="pre">easy_install</span></tt>,:</p>
-<div class="highlight-python"><pre>$ easy_install timer</pre>
+<div class="highlight-python"><pre>$ easy_install timer2</pre>
 </div>
 <p>If you have downloaded a source tarball you can install it
 by doing the following,:</p>
@@ -99,25 +99,25 @@ by doing the following,:</p>
 <div class="section" id="examples">
 <h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
 <p>Apply function after <tt class="docutils literal"><span class="pre">n</span></tt> msecs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">timer</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">timer</span><span class="o">.</span><span class="n">apply_after</span><span class="p">(</span><span class="n">msecs</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">timer2</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timer2</span><span class="o">.</span><span class="n">apply_after</span><span class="p">(</span><span class="n">msecs</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Apply function every <tt class="docutils literal"><span class="pre">n</span></tt> msecs:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timer</span><span class="o">.</span><span class="n">apply_interval</span><span class="p">(</span><span class="n">msecs</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timer2</span><span class="o">.</span><span class="n">apply_interval</span><span class="p">(</span><span class="n">msecs</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>Apply function at a specific date (a <tt class="docutils literal"><span class="pre">datetime</span></tt> object):</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timer</span><span class="o">.</span><span class="n">apply_at</span><span class="p">(</span><span class="n">datetime</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timer2</span><span class="o">.</span><span class="n">apply_at</span><span class="p">(</span><span class="n">datetime</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="section" id="cancelling-timers">
 <h2>Cancelling timers<a class="headerlink" href="#cancelling-timers" title="Permalink to this headline">¶</a></h2>
-<p>The <tt class="docutils literal"><span class="pre">apply_*</span></tt> functions returns a <tt class="docutils literal"><span class="pre">timer.Entry</span></tt> instance,
+<p>The <tt class="docutils literal"><span class="pre">apply_*</span></tt> functions returns a <tt class="docutils literal"><span class="pre">timer2.Entry</span></tt> instance,
 you can use this to cancel the execution:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tref</span> <span class="o">=</span> <span class="n">timer</span><span class="o">.</span><span class="n">apply_after</span><span class="p">(</span><span class="n">msecs</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tref</span> <span class="o">=</span> <span class="n">timer2</span><span class="o">.</span><span class="n">apply_after</span><span class="p">(</span><span class="n">msecs</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">tref</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -126,8 +126,8 @@ you can use this to cancel the execution:</p>
 <h2>Running custom <tt class="docutils literal"><span class="pre">Timer</span></tt> threads<a class="headerlink" href="#running-custom-timer-threads" title="Permalink to this headline">¶</a></h2>
 <p>When using the module interface a default timer thread is started
 as soon as you schedule something. If you want to keep track of the
-thread manually, you can use the <tt class="docutils literal"><span class="pre">timer.Timer</span></tt> class:</p>
-<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timer</span> <span class="o">=</span> <span class="n">timer</span><span class="o">.</span><span class="n">Timer</span><span class="p">()</span>
+thread manually, you can use the <tt class="docutils literal"><span class="pre">timer2.Timer</span></tt> class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timer</span> <span class="o">=</span> <span class="n">timer2</span><span class="o">.</span><span class="n">Timer</span><span class="p">()</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">timer</span><span class="o">.</span><span class="n">apply_after</span><span class="p">(</span><span class="n">msecs</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
 <span class="gp">&gt;&gt;&gt; </span><span class="n">timer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span> <span class="c"># stops the thread and joins it.</span>
 </pre></div>
@@ -135,11 +135,11 @@ thread manually, you can use the <tt class="docutils literal"><span class="pre">
 <div class="section" id="bug-tracker">
 <h3>Bug tracker<a class="headerlink" href="#bug-tracker" title="Permalink to this headline">¶</a></h3>
 <p>If you have any suggestions, bug reports or annoyances please report them
-to our issue tracker at <a class="reference external" href="http://github.com/ask/timer/issues/">http://github.com/ask/timer/issues/</a></p>
+to our issue tracker at <a class="reference external" href="http://github.com/ask/timer2/issues/">http://github.com/ask/timer2/issues/</a></p>
 </div>
 <div class="section" id="contributing">
 <h3>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h3>
-<p>Development of <tt class="docutils literal"><span class="pre">timer</span></tt> happens at Github: <a class="reference external" href="http://github.com/ask/timer">http://github.com/ask/timer</a></p>
+<p>Development of <tt class="docutils literal"><span class="pre">timer2</span></tt> happens at Github: <a class="reference external" href="http://github.com/ask/timer2">http://github.com/ask/timer2</a></p>
 <p>You are highly encouraged to participate in the development. If you don&#8217;t
 like Github (for some reason) you&#8217;re welcome to send regular patches.</p>
 </div>
@@ -161,7 +161,7 @@ file in the top distribution directory for the full license text.</p>
 </a></p>
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
-<li><a class="reference internal" href="#">timer - Schedule Python functions.</a><ul>
+<li><a class="reference internal" href="#">timer2 - Schedule Python functions.</a><ul>
 <li><a class="reference internal" href="#introduction">Introduction</a></li>
 <li><a class="reference internal" href="#documentation">Documentation</a><ul>
 <li><a class="reference internal" href="#installation">Installation</a></li>
@@ -181,7 +181,7 @@ file in the top distribution directory for the full license text.</p>
 
   <h4>Previous topic</h4>
   <p class="topless"><a href="index.html"
-                        title="previous chapter">Timer Documentation</a></p>
+                        title="previous chapter">timer2 Documentation</a></p>
   <h4>Next topic</h4>
   <p class="topless"><a href="reference/index.html"
                         title="next chapter">API Reference</a></p>
@@ -220,9 +220,9 @@ file in the top distribution directory for the full license text.</p>
           <a href="reference/index.html" title="API Reference"
              >next</a> |</li>
         <li class="right" >
-          <a href="index.html" title="Timer Documentation"
+          <a href="index.html" title="timer2 Documentation"
              >previous</a> |</li>
-        <li><a href="index.html">Timer v0.1.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">Timer2 v0.1.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
