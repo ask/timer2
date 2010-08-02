@@ -12,6 +12,14 @@ or at an interval. It can be used as a replacement to ``threading.Timer``,
 the difference is that ``timer`` is always only using a single thread (unless
 you manually start more of them)
 
+You should never use this to apply expensive operations, as this would not
+be effective when running in a single thread, rather you should make the
+timer move the operations to a execution pool (like a thread/multiprocessing
+pool, or maybe sending a message)::
+
+    >>> pool = multiprocessing.Pool()
+    >>> timer.apply_after(10000, pool.apply_async, expensive_fun)
+
 Documentation
 -------------
 
