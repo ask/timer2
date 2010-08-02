@@ -1,0 +1,225 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>timer - Schedule Python functions. &mdash; Timer v0.1.0 documentation</title>
+    <link rel="stylesheet" href="static/celery.css" type="text/css" />
+    <link rel="stylesheet" href="static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '0.1.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="static/jquery.js"></script>
+    <script type="text/javascript" src="static/underscore.js"></script>
+    <script type="text/javascript" src="static/doctools.js"></script>
+    <link rel="top" title="Timer v0.1.0 documentation" href="index.html" />
+    <link rel="next" title="API Reference" href="reference/index.html" />
+    <link rel="prev" title="Timer Documentation" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="reference/index.html" title="API Reference"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Timer Documentation"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Timer v0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="timer-schedule-python-functions">
+<h1>timer - Schedule Python functions.<a class="headerlink" href="#timer-schedule-python-functions" title="Permalink to this headline">¶</a></h1>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field"><th class="field-name">Version:</th><td class="field-body">0.1.0</td>
+</tr>
+</tbody>
+</table>
+<div class="section" id="introduction">
+<h2>Introduction<a class="headerlink" href="#introduction" title="Permalink to this headline">¶</a></h2>
+<p>The timer module lets you schedule Python functions at specific times,
+or at an interval. It can be used as a replacement to <tt class="docutils literal"><span class="pre">threading.Timer</span></tt>,
+the difference is that <tt class="docutils literal"><span class="pre">timer</span></tt> is always only using a single thread (unless
+you manually start more of them)</p>
+</div>
+<div class="section" id="documentation">
+<h2>Documentation<a class="headerlink" href="#documentation" title="Permalink to this headline">¶</a></h2>
+<p>Timer is using Sphinx, and the latest documentation is available at GitHub:</p>
+<blockquote>
+<a class="reference external" href="http://ask.github.com/timer">http://ask.github.com/timer</a></blockquote>
+<div class="section" id="installation">
+<h3>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h3>
+<p>You can install <tt class="docutils literal"><span class="pre">timer</span></tt> either via the Python Package Index (PyPI)
+or from source.</p>
+<p>To install using <tt class="docutils literal"><span class="pre">pip</span></tt>,:</p>
+<div class="highlight-python"><pre>$ pip install timer</pre>
+</div>
+<p>To install using <tt class="docutils literal"><span class="pre">easy_install</span></tt>,:</p>
+<div class="highlight-python"><pre>$ easy_install timer</pre>
+</div>
+<p>If you have downloaded a source tarball you can install it
+by doing the following,:</p>
+<div class="highlight-python"><pre>$ python setup.py build
+# python setup.py install # as root</pre>
+</div>
+</div>
+<div class="section" id="examples">
+<h3>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h3>
+<p>Apply function after <tt class="docutils literal"><span class="pre">n</span></tt> msecs:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">timer</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timer</span><span class="o">.</span><span class="n">apply_after</span><span class="p">(</span><span class="n">msecs</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Apply function every <tt class="docutils literal"><span class="pre">n</span></tt> msecs:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timer</span><span class="o">.</span><span class="n">apply_interval</span><span class="p">(</span><span class="n">msecs</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Apply function at a specific date (a <tt class="docutils literal"><span class="pre">datetime</span></tt> object):</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timer</span><span class="o">.</span><span class="n">apply_at</span><span class="p">(</span><span class="n">datetime</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">,</span> <span class="n">priority</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="cancelling-timers">
+<h2>Cancelling timers<a class="headerlink" href="#cancelling-timers" title="Permalink to this headline">¶</a></h2>
+<p>The <tt class="docutils literal"><span class="pre">apply_*</span></tt> functions returns a <tt class="docutils literal"><span class="pre">timer.Entry</span></tt> instance,
+you can use this to cancel the execution:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">tref</span> <span class="o">=</span> <span class="n">timer</span><span class="o">.</span><span class="n">apply_after</span><span class="p">(</span><span class="n">msecs</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">tref</span><span class="o">.</span><span class="n">cancel</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="running-custom-timer-threads">
+<h2>Running custom <tt class="docutils literal"><span class="pre">Timer</span></tt> threads<a class="headerlink" href="#running-custom-timer-threads" title="Permalink to this headline">¶</a></h2>
+<p>When using the module interface a default timer thread is started
+as soon as you schedule something. If you want to keep track of the
+thread manually, you can use the <tt class="docutils literal"><span class="pre">timer.Timer</span></tt> class:</p>
+<div class="highlight-python"><div class="highlight"><pre><span class="gp">&gt;&gt;&gt; </span><span class="n">timer</span> <span class="o">=</span> <span class="n">timer</span><span class="o">.</span><span class="n">Timer</span><span class="p">()</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timer</span><span class="o">.</span><span class="n">apply_after</span><span class="p">(</span><span class="n">msecs</span><span class="p">,</span> <span class="n">fun</span><span class="p">,</span> <span class="n">args</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">timer</span><span class="o">.</span><span class="n">stop</span><span class="p">()</span> <span class="c"># stops the thread and joins it.</span>
+</pre></div>
+</div>
+<div class="section" id="bug-tracker">
+<h3>Bug tracker<a class="headerlink" href="#bug-tracker" title="Permalink to this headline">¶</a></h3>
+<p>If you have any suggestions, bug reports or annoyances please report them
+to our issue tracker at <a class="reference external" href="http://github.com/ask/timer/issues/">http://github.com/ask/timer/issues/</a></p>
+</div>
+<div class="section" id="contributing">
+<h3>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h3>
+<p>Development of <tt class="docutils literal"><span class="pre">timer</span></tt> happens at Github: <a class="reference external" href="http://github.com/ask/timer">http://github.com/ask/timer</a></p>
+<p>You are highly encouraged to participate in the development. If you don&#8217;t
+like Github (for some reason) you&#8217;re welcome to send regular patches.</p>
+</div>
+<div class="section" id="license">
+<h3>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h3>
+<p>This software is licensed under the <tt class="docutils literal"><span class="pre">New</span> <span class="pre">BSD</span> <span class="pre">License</span></tt>. See the <tt class="docutils literal"><span class="pre">LICENSE</span></tt>
+file in the top distribution directory for the full license text.</p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper"><p class="logo"><a href="index.html">
+  <img class="logo" width="128" height="128" src="http://cloud.github.com/downloads/ask/timer/timer.jpg" alt="Logo"/>
+</a></p>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">timer - Schedule Python functions.</a><ul>
+<li><a class="reference internal" href="#introduction">Introduction</a></li>
+<li><a class="reference internal" href="#documentation">Documentation</a><ul>
+<li><a class="reference internal" href="#installation">Installation</a></li>
+<li><a class="reference internal" href="#examples">Examples</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#cancelling-timers">Cancelling timers</a></li>
+<li><a class="reference internal" href="#running-custom-timer-threads">Running custom <tt class="docutils literal"><span class="pre">Timer</span></tt> threads</a><ul>
+<li><a class="reference internal" href="#bug-tracker">Bug tracker</a></li>
+<li><a class="reference internal" href="#contributing">Contributing</a></li>
+<li><a class="reference internal" href="#license">License</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Timer Documentation</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="reference/index.html"
+                        title="next chapter">API Reference</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="sources/introduction.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="py-modindex.html" title="Python Module Index"
+             >modules</a> |</li>
+        <li class="right" >
+          <a href="reference/index.html" title="API Reference"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Timer Documentation"
+             >previous</a> |</li>
+        <li><a href="index.html">Timer v0.1.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2009-2010, Ask Solem.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0b2.
+    </div>
+  </body>
+</html>
