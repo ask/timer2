@@ -1,5 +1,5 @@
 timer2 Documentation
-===================
+====================
 
 Contents:
 
