@@ -59,7 +59,7 @@ def upload_docs(options):
 
 @task
 def autodoc(options):
-    sh("contrib/release/doc4allmods timer")
+    sh("contrib/release/doc4allmods timer2")
 
 
 @task
@@ -69,7 +69,7 @@ def verifyindex(options):
 
 @task
 def flakes(options):
-    sh("find timer -name '*.py' | xargs pyflakes")
+    sh("find timer2 -name '*.py' | xargs pyflakes")
 
 
 @task
@@ -88,7 +88,7 @@ def readme(options):
 
 @task
 def bump(options):
-    sh("bump -c timer")
+    sh("bump -c timer2")
 
 
 @task

@@ -1,4 +1,4 @@
-"""Timer - Scheduler for Python functions."""
+"""timer2 - Scheduler for Python functions."""
 
 from __future__ import generators
 

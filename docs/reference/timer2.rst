@@ -1,11 +1,11 @@
 ==========================================================
- timer
+ timer2
 ==========================================================
 
 .. contents::
     :local:
-.. currentmodule:: timer
+.. currentmodule:: timer2
 
-.. automodule:: timer
+.. automodule:: timer2
     :members:
     :undoc-members:

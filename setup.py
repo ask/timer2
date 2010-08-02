@@ -12,15 +12,15 @@ except ImportError:
     use_setuptools()
     from setuptools import setup, find_packages
 
-import timer as distmeta
+import timer2 as distmeta
 
 if os.path.exists("README.rst"):
     long_description = codecs.open("README.rst", "r", "utf-8").read()
 else:
-    long_description = "See http://github.com/ask/timer"
+    long_description = "See http://github.com/ask/timer2"
 
 setup(
-    name='timer',
+    name='timer2',
     version=distmeta.__version__,
     description=distmeta.__doc__,
     author=distmeta.__author__,
@@ -37,12 +37,9 @@ setup(
     classifiers=[
         "Development Status :: 5 - Production/Stable",
         "Operating System :: OS Independent",
-        "Environment :: No Input/Output (Daemon)",
         "Intended Audience :: Developers",
         "License :: OSI Approved :: BSD License",
         "Operating System :: POSIX",
-        "Topic :: Communications",
-        "Topic :: System :: Distributed Computing",
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Programming Language :: Python",
         "Programming Language :: Python :: 2",

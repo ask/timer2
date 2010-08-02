@@ -7,4 +7,4 @@ include README.rst
 include README
 include TODO
 recursive-include docs *
-recursive-include timer *.py
+recursive-include timer2 *.py

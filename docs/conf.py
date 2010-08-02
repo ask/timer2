@@ -7,7 +7,7 @@ import os
 # is relative to the documentation root, use os.path.abspath to make it
 # absolute, like shown here.
 sys.path.append(os.path.join(os.pardir, "tests"))
-import timer
+import timer2
 
 # General configuration
 # ---------------------
@@ -24,7 +24,7 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = u'Timer'
+project = u'Timer2'
 copyright = u'2009-2010, Ask Solem'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -32,9 +32,9 @@ copyright = u'2009-2010, Ask Solem'
 # built documents.
 #
 # The short X.Y version.
-version = ".".join(map(str, timer.VERSION[0:2]))
+version = ".".join(map(str, timer2.VERSION[0:2]))
 # The full version, including alpha/beta/rc tags.
-release = timer.__version__
+release = timer2.__version__
 
 exclude_trees = ['.build']
 
@@ -58,7 +58,7 @@ html_use_modindex = True
 html_use_index = True
 
 latex_documents = [
-  ('index', 'Timer.tex', ur'Timer Documentation',
+  ('index', 'Timer2.tex', ur'Timer2 Documentation',
    ur'Ask Solem', 'manual'),
 ]
 
