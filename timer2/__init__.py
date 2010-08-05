@@ -93,7 +93,7 @@ class Schedule(object):
                         if not entry.cancelled:
                             try:
                                 entry()
-                            except Exception:
+                            except Exception, exc:
                                 if not self.handle_error(sys.exc_info()):
                                     warnings.warn(repr(exc),
                                                   TimedFunctionFailed)
@@ -189,6 +189,13 @@ class Timer(Thread):
 
     def clear(self):
         self.schedule.clear()
+
+    def empty(self):
+        return self.schedule.empty()
+
+    @property
+    def queue(self):
+        return self.schedule.queue
 
 _default_timer = Timer()
 apply_after = _default_timer.apply_after
